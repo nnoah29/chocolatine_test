@@ -3,7 +3,8 @@ name: what time is it
 on: [push]
 
 jobs:
-    runs-on: ubuntu-latest
-    steps:
-      - name: what time is it 
-        run: date
+    Run-Date:
+        runs-on: ubuntu-latest
+        steps:
+          - name: what time is it 
+            run: date
