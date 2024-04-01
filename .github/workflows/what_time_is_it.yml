@@ -7,4 +7,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: what time is it 
-            run: date
+            run: ls
