@@ -23,6 +23,7 @@ jobs:
       - id: check_coding_style
         run: |
           check.sh $(pwd) $(pwd)
+          date
           # CODING_STYLE_ERRORS=$(cat $(pwd)/coding-style-reports.log)
           # for ERRORS in $CODING_STYLE_ERRORS; do
           #   array=(`echo $ERRORS | sed 's/:/\n/g'`)
