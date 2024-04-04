@@ -15,25 +15,28 @@ env:
 
 jobs:
   check_coding_style:
-    name: "Use coding_style_checker script to verify if the code is clean and report any coding-style errors"
+    name: Check Coding Style
     runs-on: ubuntu-latest
-    container: ghcr.io/epitech/coding-style-checker:latest
+    container:
+      image: ghcr.io/epitech/coding-style-checker:latest
     steps:
-      - uses: actions/checkout@v2
-      - id: check_coding_style
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Run coding style check
         run: |
-          check.sh $(pwd) $(pwd)
-          CODING_STYLE_ERRORS=$(cat $(pwd)/coding-style-reports.log)
-          for ERRORS in $CODING_STYLE_ERRORS; do
-            array=(`echo $ERRORS | sed 's/:/\n/g'`)
-            echo "::error file=${array[1]#./},title=${array[3]#./} coding style errors detected: ${array[2]#./}::${array[4]#./}"
-          done
-          if [[ -n $CODING_STYLE_ERRORS ]]
-          then
-            exit 1
-          else
-            echo No coding style errors detected
+          ./check.sh $(pwd) $(pwd)
+          
+      - name: Display coding style errors
+        if: always()
+        run: |
+          if [ -f coding-style-reports.log ]; then
+            cat coding-style-reports.log
           fi
+          
+      - name: Fail if coding style errors found
+        if: failure()
+        run: exit 1
   
 
   # check_repo:
