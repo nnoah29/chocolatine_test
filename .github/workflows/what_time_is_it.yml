@@ -30,7 +30,7 @@ jobs:
           check.sh $(pwd) $(pwd)
       - name: date
         run: |
-          ./erro.sh
+          ./error.sh
           date
           exit 1
   
