@@ -30,7 +30,8 @@ jobs:
           check.sh $(pwd) $(pwd)
       - name: date
         run: |
-          echo "::error title=oki"
+          # echo "::error title=oki"
+          echo "::error title=Titre personnalisé,file=app.js,line=10,col=5::Error: Test failed at line 10, column 5"
           date
           exit 1
   
