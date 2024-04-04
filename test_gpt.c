@@ -17,10 +17,6 @@ typedef struct room {
     bool if_end;
 } room;
 
-typedef struct robot {
-    char name[MAX_NAME_LENGTH];
-    struct room *current_room;
-} robot;
 
 void my_putstr(const char *str) {
     printf("%s", str);
