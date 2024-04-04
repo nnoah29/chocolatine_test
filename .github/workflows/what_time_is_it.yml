@@ -23,11 +23,11 @@ jobs:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         
       - name: Run coding style check
         run: |
-          ./check.sh $(pwd) $(pwd)
+          check.sh $(pwd) $(pwd)
           
       - name: Display coding style errors
         if: always()
