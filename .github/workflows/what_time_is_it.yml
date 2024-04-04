@@ -31,7 +31,6 @@ jobs:
       - name: date
         run: |
           echo "::error title=oki"
-          echo "::error file=${array[1]#./},title=${array[3]#./} coding style errors detected: ${array[2]#./}::${array[4]#./}"
           date
           exit 1
   
