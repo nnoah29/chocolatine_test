@@ -1,10 +1,39 @@
-name: what time is it
+env:
+  MIRROR_URL: "https://exemple.com/epitech/depot"
+  EXECUTABLES: "mon_script,repertoire1/sousrepertoire2/mon_executable"
 
-on: [push]
+name: Chocolatine workflow
+
+on: 
+  push:
+    branches:
+      -'*'
+      -'!ga-ignore-*'
+  pull_request:
+    branches:
+      - '*'
 
 jobs:
-    Run-Date:
-        runs-on: ubuntu-latest
-        steps:
-          - name: what time is it 
-            run: ls
+  check_coding_style:
+    name: Check Coding Style
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/epitech/coding-style-checker:latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Run coding style check
+        run: |
+          ./check.sh $(pwd) $(pwd)
+          
+      - name: Display coding style errors
+        if: always()
+        run: |
+          if [ -f coding-style-reports.log ]; then
+            cat coding-style-reports.log
+          fi
+          
+      - name: Fail if coding style errors found
+        if: failure()
+        run: exit 1
