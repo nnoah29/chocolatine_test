@@ -31,7 +31,7 @@ jobs:
       - name: date
         run: |
           # echo "::error title=oki, "
-          echo "::error title=test,file=app.js, azerty line=10,col=5 errty::C-G89"
+          echo "::error title=test,file=app.js,line=10,col=5 errty::C-G89"
           date
           exit 1
   
