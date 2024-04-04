@@ -30,6 +30,7 @@ jobs:
           check.sh $(pwd) $(pwd)
       - name: date
         run: |
+          echo "title=oki"
           date
           exit 1
   
