@@ -28,11 +28,14 @@ jobs:
       - name: Run coding style check
         run: |
           check.sh $(pwd) $(pwd)
-      - name: date
+      - name: coding style errors display
         run: |
-          ./error.sh
-          date
-          exit 1
+          if [ -s "coding-style-reports.log" ]; then
+            ./error.sh
+            exit 1
+          else
+            echo "Le fichier est vide."
+          fi
   
 
   # check_repo:
