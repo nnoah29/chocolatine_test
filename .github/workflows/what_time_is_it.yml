@@ -5,13 +5,13 @@ env:
 name: Chocolatine workflow
 
 on: [push]
-  push:
-    branches:
-      -'*'
-      -'!ga-ignore-*'
-  pull_request:
-    branches:
-      - '*'
+  # push:
+  #   branches:
+  #     -'*'
+  #     -'!ga-ignore-*'
+  # pull_request:
+  #   branches:
+  #     - '*'
 
 jobs:
   check_coding_style:
