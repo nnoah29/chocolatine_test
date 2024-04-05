@@ -49,16 +49,20 @@ jobs:
         timeout-minutes: 2
       - run: make clean
       - run: |
-        chemin_executable: "${EXECUTABLES}"
-        if [ -z "$chemin_executable" ]; then
-            exit 1
-        fi
-        if [ ! -f "$chemin_executable" ]; then
-            exit 1
-        fi
-        if [ ! -x "$chemin_executable" ]; then
-            exit 1
-        fi
+        variable_env="${EXECUTABLES}"
+        IFS=":"
+        for element in $variable_env; do
+            echo "Élément: $element"
+            if [ -z "$element" ]; then
+                    exit 1
+            fi
+            if [ ! -f "$element" ]; then
+                exit 1
+            fi
+            if [ ! -x "$element" ]; then
+                exit 1
+            fi
+        done
 
   run_tests:
     needs: check_program_compilation
