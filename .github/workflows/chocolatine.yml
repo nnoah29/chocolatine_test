@@ -35,53 +35,53 @@ jobs:
             exit 1
           fi
   
-  # check_program_compilation:
-  #   needs: check_coding_style
-  #   name: "Checks compilation"
-  #   runs-on: ubuntu-latest
-  #   container:
-  #     image: epitechcontent/epitest-docker:latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - id: check_program_compilation
-  #       run: make
-  #       timeout-minutes: 2
-  #     - run: make clean
-  #     - run: |
-  #       chemin_executable=$EXECUTABLES
-  #       if [ -z "$chemin_executable" ]; then
-  #           exit 1
-  #       fi
-  #       if [ ! -f "$chemin_executable" ]; then
-  #           exit 1
-  #       fi
-  #       if [ ! -x "$chemin_executable" ]; then
-  #           exit 1
-  #       fi
+  check_program_compilation:
+    needs: check_coding_style
+    name: "Checks compilation"
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker:latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: check_program_compilation
+        run: make
+        timeout-minutes: 2
+      - run: make clean
+      - run: |
+        chemin_executable=$EXECUTABLES
+        if [ -z "$chemin_executable" ]; then
+            exit 1
+        fi
+        if [ ! -f "$chemin_executable" ]; then
+            exit 1
+        fi
+        if [ ! -x "$chemin_executable" ]; then
+            exit 1
+        fi
 
-  # run_tests:
-  #   needs: check_program_compilation
-  #   name: "Runs tests"
-  #   runs-on: ubuntu-latest
-  #   container:
-  #     image: epitechcontent/epitest-docker:latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - id: run_tests
-  #       run: make tests_run
-  #       timeout-minutes: 2
+  run_tests:
+    needs: check_program_compilation
+    name: "Runs tests"
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker:latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: run_tests
+        run: make tests_run
+        timeout-minutes: 2
 
-  # push_to_mirror:
-  #   needs: run_tests
-  #   name: "push to mirror"
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
-  #     - uses: pixta-dev/repository-mirroring-action@v1
-  #       with:
-  #         target_repo_url:
-  #           ${{ env.MIRROR_URL }}
-  #         ssh_private_key:
-  #           ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+  push_to_mirror:
+    needs: run_tests
+    name: "push to mirror"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url:
+            ${{ env.MIRROR_URL }}
+          ssh_private_key:
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}
