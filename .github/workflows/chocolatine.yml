@@ -48,14 +48,14 @@ jobs:
         timeout-minutes: 2
       - run: make clean
       - run: |
-        chemin_executable=$EXECUTABLES
-        if [ -z "$chemin_executable" ]; then
+        # chemin_executable=$EXECUTABLES
+        if [ -z ${{ env.EXECUTABLES }} ]; then
             exit 1
         fi
-        if [ ! -f "$chemin_executable" ]; then
+        if [ ! -f ${{ env.EXECUTABLES }} ]; then
             exit 1
         fi
-        if [ ! -x "$chemin_executable" ]; then
+        if [ ! -x ${{ env.EXECUTABLES }} ]; then
             exit 1
         fi
 
