@@ -35,7 +35,6 @@ jobs:
             exit 1
           fi
 
-chemin_executable=${{ env.EXECUTABLES }}
 
   check_program_compilation:
     needs: check_coding_style
@@ -50,6 +49,7 @@ chemin_executable=${{ env.EXECUTABLES }}
         timeout-minutes: 2
       - run: make clean
       - run: |
+        chemin_executable=$env.EXECUTABLES
         if [ -z "$chemin_executable" ]; then
             exit 1
         fi
