@@ -49,20 +49,21 @@ jobs:
         timeout-minutes: 2
       - run: make clean
       - run: |
-        variable_env="${EXECUTABLES}"
-        IFS=":"
-        for element in $variable_env; do
-            echo "Élément: $element"
-            if [ -z "$element" ]; then
-                    exit 1
-            fi
-            if [ ! -f "$element" ]; then
-                exit 1
-            fi
-            if [ ! -x "$element" ]; then
-                exit 1
-            fi
-        done
+        OIFS=$IFS
+          IFS=','
+          for x in $EXECUTABLES
+            do
+              if [ -z "$x" ]; then
+                  exit 1
+              fi
+              if [ ! -f "$x" ]; then
+                  exit 1
+              fi
+              if [ ! -x "$x" ]; then
+                  exit 1
+              fi
+            done
+          IFS=$OIFS
 
   run_tests:
     needs: check_program_compilation
