@@ -49,14 +49,14 @@ jobs:
         timeout-minutes: 2
       - run: make clean
       - run: |
-        chemin_executable=$env.EXECUTABLES
-        if [ -z "$chemin_executable" ]; then
+        EXE=$env.EXECUTABLES
+        if [ -z "$EXE" ]; then
             exit 1
         fi
-        if [ ! -f "$chemin_executable" ]; then
+        if [ ! -f "$EXE" ]; then
             exit 1
         fi
-        if [ ! -x "$chemin_executable" ]; then
+        if [ ! -x "$EXE" ]; then
             exit 1
         fi
 
