@@ -49,14 +49,13 @@ jobs:
         timeout-minutes: 2
       - run: make clean
       - run: |
-        EXE=$env.EXECUTABLES
-        if [ -z "$EXE" ]; then
+        if [ -z "$env.EXECUTABLES" ]; then
             exit 1
         fi
-        if [ ! -f "$EXE" ]; then
+        if [ ! -f "$env.EXECUTABLES" ]; then
             exit 1
         fi
-        if [ ! -x "$EXE" ]; then
+        if [ ! -x "$env.EXECUTABLES" ]; then
             exit 1
         fi
 
