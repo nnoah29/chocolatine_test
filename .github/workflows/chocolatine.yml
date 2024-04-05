@@ -35,7 +35,7 @@ jobs:
             exit 1
           fi
 
-chemin_executable=$EXECUTABLES
+chemin_executable=${{ env.EXECUTABLES }}
 
   check_program_compilation:
     needs: check_coding_style
