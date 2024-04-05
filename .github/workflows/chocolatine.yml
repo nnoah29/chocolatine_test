@@ -34,7 +34,9 @@ jobs:
             done < "$fichier"
             exit 1
           fi
-  
+
+chemin_executable=$EXECUTABLES
+
   check_program_compilation:
     needs: check_coding_style
     name: "Checks compilation"
@@ -48,14 +50,13 @@ jobs:
         timeout-minutes: 2
       - run: make clean
       - run: |
-        # chemin_executable=$EXECUTABLES
-        if [ -z $EXECUTABLES ]; then
+        if [ -z "$chemin_executable" ]; then
             exit 1
         fi
-        if [ ! -f $EXECUTABLES ]; then
+        if [ ! -f "$chemin_executable" ]; then
             exit 1
         fi
-        if [ ! -x $EXECUTABLES ]; then
+        if [ ! -x "$chemin_executable" ]; then
             exit 1
         fi
 
