@@ -49,13 +49,13 @@ jobs:
       - run: make clean
       - run: |
         # chemin_executable=$EXECUTABLES
-        if [ -z ${{ env.EXECUTABLES }} ]; then
+        if [ -z "$EXECUTABLES" ]; then
             exit 1
         fi
-        if [ ! -f ${{ env.EXECUTABLES }} ]; then
+        if [ ! -f "$EXECUTABLES" ]; then
             exit 1
         fi
-        if [ ! -x ${{ env.EXECUTABLES }} ]; then
+        if [ ! -x "$EXECUTABLES" ]; then
             exit 1
         fi
 
